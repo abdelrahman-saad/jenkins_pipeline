@@ -1,3 +1,4 @@
+def call(){
 pipeline {
   agent { label 'agent1' }
     stages {
@@ -18,4 +19,6 @@ pipeline {
             }
         }
     }
+}
+
 }
