@@ -4,18 +4,19 @@ pipeline {
     stages {
       stage('installing nginx') { 
             steps {
+              sh 'sudo apt-get update -y'
                 sh 'sudo apt-get install nginx -y'
             }
         }
-      stage('enable firewall') { 
+      stage('start nginx') { 
             steps {
-                sh "sudo ufw allow 'Nginx HTTP' -y"
-                sh 'sudo rm /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default /var/www/html/index.nginx-debian.html'
-            }
+                sh "sudo service nginx start"
+                }
         }
       stage('Test') { 
             steps {
-                sh 'sudo systemctl nginx status' 
+                sh 'sudo service nginx status'
+                sh 'curl localhost'
             }
         }
     }
